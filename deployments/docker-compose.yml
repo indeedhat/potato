@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+  potato:
+    container_name: conspiracy-potato
+    restart: always
+    build: ./Dockerfile
+    volumes:
+      - "./.env:/app/.env"
+      - "./gorm.db:/app/gorm.db"
+    ports:
+      - 8080:8080/tcp

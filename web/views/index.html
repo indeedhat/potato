@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Potato</title>
+    </head>
+    <body>
+        <button id="generate">Click To Generate</button>
+        <div id="container">
+        </div>
+        <script>
+            let $button = document.querySelector("#generate");
+            let $container = document.querySelector("#container");
+
+            $button.addEventListener("click", async e => {
+                e.preventDefault();
+                $container.innerHTML = "";
+                $button.innerHTML = "Generating";
+                $button.disabled = true;
+
+                let resp = await fetch("/api/conspiracy");
+                let json = await resp.json();
+
+                $button.innerHTML = "Click To Generate";
+                $button.disabled = false;
+                $container.innerHTML = json.conspiracy.replace(/\r?\n/g, "<br />");
+            });
+        </script>
+    </body>
+</html>
